@@ -11,7 +11,6 @@ import {createHash} from "crypto";
 import {CodeBlockResponse} from "express/src/types/code-block-response";
 import logger from "../../lib/logger";
 
-/* eslint-disable @typescript-eslint/no-unused-vars */
 export default class LambdaFacade implements LambdaFacadeInterface {
     private readonly client: Axios;
     public readonly EMAIL_BLOCK_PREFIX = "email:block:";
