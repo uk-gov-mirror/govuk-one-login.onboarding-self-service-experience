@@ -1,5 +1,5 @@
-import logger from "../logger";
-import SheetsInterface from "./interface";
+import logger from "../logger.js";
+import SheetsInterface from "./interface.js";
 
 export default class SheetsService implements SheetsInterface {
     private implementation!: SheetsInterface;

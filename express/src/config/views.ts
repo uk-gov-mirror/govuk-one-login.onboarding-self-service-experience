@@ -1,6 +1,6 @@
 import {Express} from "express";
 import {configure, render} from "nunjucks";
-import {views} from "./resources";
+import {views} from "./resources.js";
 
 export default function configureViews(app: Express) {
     const govukViews = require.resolve("govuk-frontend").match(/.*govuk-frontend\//)?.[0];
