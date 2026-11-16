@@ -1,5 +1,7 @@
-const IsFixedCredMock = vi.fn();
-const respondToMFAChallengeForFixedOTPCredentialMock = vi.fn();
+const {IsFixedCredMock, respondToMFAChallengeForFixedOTPCredentialMock} = vi.hoisted(() => ({
+    IsFixedCredMock: vi.fn(),
+    respondToMFAChallengeForFixedOTPCredentialMock: vi.fn()
+}));
 
 vi.mock("../../src/lib/fixedOTP", () => ({
     isFixedOTPCredential: IsFixedCredMock,

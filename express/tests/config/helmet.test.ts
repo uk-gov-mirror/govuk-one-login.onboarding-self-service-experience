@@ -1,9 +1,11 @@
 import Helmet from "../../src/config/helmet.js";
 import {TEST_HELMET_CONFIG} from "../constants.js";
 
-const helmetMock = vi.fn();
+const {helmetMock} = vi.hoisted(() => ({
+    helmetMock: vi.fn()
+}));
 
-vi.mock("helmet", () => helmetMock);
+vi.mock("helmet", () => ({default: helmetMock}));
 
 describe("helmet config tests", () => {
     it("applies the expected values when calling the Helmet function", () => {

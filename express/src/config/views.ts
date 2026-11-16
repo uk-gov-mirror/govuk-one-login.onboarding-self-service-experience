@@ -1,19 +1,16 @@
-import {Express} from "express";
+import type express from "express";
 import nunjucks from "nunjucks";
 import {views} from "./resources.js";
 
-export default function configureViews(app: Express) {
-    const govukViews = require.resolve("govuk-frontend").match(/.*govuk-frontend\//)?.[0];
+export default function configureViews(
+  app: express.Application,
+): nunjucks.Environment {
+  const nunjucksEnv: nunjucks.Environment = nunjucks.configure(views, {
+    autoescape: true,
+    express: app,
+    noCache: true,
+  });
 
-    if (!govukViews) {
-        throw new Error("Couldn't load govuk-frontend module");
-    }
+  return nunjucksEnv;
+};
 
-    nunjucks.configure([views, govukViews], {
-        autoescape: true,
-        noCache: true,
-        express: app
-    });
-
-    app.engine("njk", nunjucks.render);
-}

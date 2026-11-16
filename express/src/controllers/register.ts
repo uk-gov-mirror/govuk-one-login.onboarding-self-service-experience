@@ -1,7 +1,7 @@
 import {CodeMismatchException, NotAuthorizedException, UsernameExistsException} from "@aws-sdk/client-cognito-identity-provider";
-import {randomUUID} from "crypto";
+import crypto from "crypto";
 import {RequestHandler} from "express";
-import {Service} from "../../@types/Service";
+import {Service} from "../../@types/Service/index.js";
 import AuthenticationResultParser from "../lib/authentication-result-parser.js";
 import {domainUserToDynamoUser} from "../lib/models/user-utils.js";
 import {convertToCountryPrefixFormat} from "../lib/mobile-number.js";
@@ -11,6 +11,7 @@ import {SignupStatus, SignupStatusStage} from "../lib/utils/signup-status.js";
 import {getFixedOTPCredentialMobileNumber, isPseudonymisedFixedOTPCredential} from "../lib/fixedOTP.js";
 import {getNextPathsAndRedirect, RegisterRoutes, SignInRoutes} from "../middleware/state-machine.js";
 import logger from "../lib/logger.js";
+import {nonNull} from "../lib/utils/optional.js";
 
 export const showGetEmailForm = render("register/enter-email-address.njk");
 
@@ -375,7 +376,7 @@ export const resendEmailVerificationCode: RequestHandler = async (req, res) => {
 export const showAddServiceForm = render("register/add-service-name.njk");
 
 export const processAddServiceForm: RequestHandler = async (req, res, next) => {
-    const uuid = randomUUID();
+    const uuid = crypto.randomUUID();
     const service: Service = {
         id: `service#${uuid}`,
         serviceName: req.body.serviceName

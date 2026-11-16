@@ -1,6 +1,8 @@
-const getMock = vi.fn();
-const appendMock = vi.fn();
-const JwtMock = vi.fn();
+const {getMock, appendMock, JwtMock} = vi.hoisted(() => ({
+    getMock: vi.fn(),
+    appendMock: vi.fn(),
+    JwtMock: vi.fn()
+}));
 
 vi.mock("googleapis", () => ({
     google: {
@@ -51,7 +53,9 @@ describe("RealSheetsService tests", () => {
     });
 
     it("calls the expected functions when the appendValues method is called", async () => {
-        JwtMock.mockResolvedValue(TEST_JWT);
+        JwtMock.mockImplementation(function MockJWT() {
+            return {token: TEST_JWT};
+        });
         getMock.mockResolvedValue(TEST_GET_VALUES_RESPONSE);
         appendMock.mockResolvedValue(TEST_APPEND_ROWS_RESPONSE);
 
@@ -64,12 +68,12 @@ describe("RealSheetsService tests", () => {
             scopes: TEST_SCOPES
         });
         expect(getMock).toHaveBeenCalledWith({
-            auth: TEST_JWT,
+            auth: expect.objectContaining({token: TEST_JWT}),
             spreadsheetId: TEST_SPREADSHEET_ID,
             range: TEST_HEADER_RANGE
         });
         expect(appendMock).toHaveBeenCalledWith({
-            auth: TEST_JWT,
+            auth: expect.objectContaining({token: TEST_JWT}),
             spreadsheetId: TEST_SPREADSHEET_ID,
             range: TEST_DATA_RANGE,
             valueInputOption: "USER_ENTERED",

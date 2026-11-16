@@ -1,12 +1,14 @@
-const send = vi.fn();
-const queryCommand = vi.fn();
-const scanCommand = vi.fn();
-const updateItemCommand = vi.fn();
-const deleteItemCommand = vi.fn();
+const {send, queryCommand, scanCommand, updateItemCommand, deleteItemCommand} = vi.hoisted(() => ({
+    send: vi.fn(),
+    queryCommand: vi.fn(),
+    scanCommand: vi.fn(),
+    updateItemCommand: vi.fn(),
+    deleteItemCommand: vi.fn()
+}));
 
 vi.mock("@aws-sdk/client-dynamodb", () => {
     return {
-        DynamoDBClient: vi.fn(() => {
+        DynamoDBClient: vi.fn(function () {
             return {
                 send: send
             };

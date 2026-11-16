@@ -28,6 +28,7 @@ import {
 import {Command} from "@aws-sdk/types";
 import {cognito, region} from "../../config/environment.js";
 import CognitoInterface from "./CognitoInterface.js";
+import {nonNull} from "../../lib/utils/optional.js";
 import {
     fixedOTPInitialise,
     getFixedOTPCredentialEmailAddress,

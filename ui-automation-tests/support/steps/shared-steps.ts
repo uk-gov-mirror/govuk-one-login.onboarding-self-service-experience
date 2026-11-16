@@ -16,7 +16,7 @@ import {
     clickYourAccountSubnavLink
 } from "./shared-functions.js";
 
-import AxePuppeteer from "@axe-core/puppeteer";
+import {AxePuppeteer} from "@axe-core/puppeteer";
 
 Given("the user is signed in", async function (this: TestContext) {
     await this.goToPath("/sign-in");

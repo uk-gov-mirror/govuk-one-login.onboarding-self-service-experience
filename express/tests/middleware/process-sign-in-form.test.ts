@@ -1,5 +1,7 @@
-const IsFixedCredMock = vi.fn();
-const IsPseudoFixedOTPCredMock = vi.fn();
+const {IsFixedCredMock, IsPseudoFixedOTPCredMock} = vi.hoisted(() => ({
+    IsFixedCredMock: vi.fn(),
+    IsPseudoFixedOTPCredMock: vi.fn()
+}));
 
 vi.mock("../../src/services/self-service-services-service");
 vi.mock("../../src/lib/fixedOTP", () => ({

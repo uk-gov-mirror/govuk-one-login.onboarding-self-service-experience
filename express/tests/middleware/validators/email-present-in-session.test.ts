@@ -1,4 +1,3 @@
-import "config/session-data.js";
 import {Request} from "express";
 import checkEmailIsPresentInSession from "../../../src/middleware/validators/email-present-in-session.js";
 import {request, response} from "../../mocks.js";

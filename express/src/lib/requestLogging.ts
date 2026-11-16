@@ -1,4 +1,5 @@
-import pinoHttp from "pino-http";
+import pinoHttpModule from "pino-http";
+import type {RequestHandler} from "express";
 import logger from "./logger.js";
 
 interface ResponseWithRaw {
@@ -40,6 +41,15 @@ export const responseSerializer = (res: ResponseWithRaw) => ({
         "content-length": res.raw?.getHeader("content-length")
     }
 });
+
+const pinoHttp = pinoHttpModule as unknown as (options: {
+    logger: typeof logger;
+    customProps: () => object;
+    serializers: {
+        req: typeof requestSerializer;
+        res: typeof responseSerializer;
+    };
+}) => RequestHandler;
 
 export const requestLoggingMiddleware = pinoHttp({
     logger,

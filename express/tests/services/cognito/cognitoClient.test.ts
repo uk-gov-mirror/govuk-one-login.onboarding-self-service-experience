@@ -35,7 +35,7 @@ import {
     TEST_SIGN_UP_STATUS
 } from "../../constants.js";
 import {mockClient} from "aws-sdk-client-mock";
-import "aws-sdk-client-mock-jest";
+import "aws-sdk-client-mock-jest/vitest";
 import CognitoClient from "../../../src/services/cognito/CognitoClient.js";
 import crypto from "node:crypto";
 import * as fixedOTP from "../../../src/lib/fixedOTP.js";

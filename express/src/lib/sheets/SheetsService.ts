@@ -12,12 +12,12 @@ export default class SheetsService implements SheetsInterface {
     async init() {
         if (process.env.USE_STUB_SHEETS === "true") {
             logger.debug("Using Stub Sheets Service");
-            const module = await import("./stubSheets/stubSheetsService");
+            const module = await import("./stubSheets/stubSheetsService.js");
             const service = module.default;
             this.implementation = new service(this.spreadsheetId);
         } else {
             logger.debug("Using the actual implementation of the Sheets Service");
-            const module = await import("./realSheets/realSheetsService");
+            const module = await import("./realSheets/realSheetsService.js");
             const service = module.default;
             this.implementation = new service(this.spreadsheetId);
         }

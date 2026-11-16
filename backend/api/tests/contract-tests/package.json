@@ -9,8 +9,8 @@
     "build": "npm run buildts && npm run buildjs",
     "connect": "node dist/connect.js",
     "publish": "node dist/publish.js",
-    "test": "jest && npm run publish",
-    "test:pact": "jest --detectOpenHandles -runInBand"
+    "test": "vitest run --config vitest.config.ts && npm run publish",
+    "test:pact": "vitest run --config vitest.config.ts"
   },
   "author": "",
   "license": "ISC",

@@ -4,6 +4,7 @@ import SelfServiceServicesService from "../services/self-service-services-servic
 import AuthenticationResultParser from "../lib/authentication-result-parser.js";
 import {removeContact, addContact} from "../lib/updateContacts.js";
 import validate from "../lib/validators/email-validator.js";
+import {nonNull} from "../lib/utils/optional.js";
 import {Request, Response} from "express-serve-static-core";
 import logger from "../lib/logger.js";
 

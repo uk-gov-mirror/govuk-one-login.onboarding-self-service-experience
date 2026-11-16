@@ -1,6 +1,3 @@
-const timestampMock = vi.fn();
-vi.mock("../../src/lib/timestamp", () => timestampMock);
-
 import SelfServiceServicesService from "../../src/services/self-service-services-service.js";
 import {
     processAddPostLogoutUriForm,
@@ -88,6 +85,9 @@ import {
 import AuthenticationResultParser from "../../src/lib/authentication-result-parser.js";
 
 import logger from "../../src/lib/logger.js";
+
+const {timestampMock} = vi.hoisted(() => ({timestampMock: vi.fn()}));
+vi.mock("../../src/lib/timestamp", () => timestampMock);
 
 const s4ListClientsSpy = vi.spyOn(SelfServiceServicesService.prototype, "listClients");
 const s4SendTxmaLogSpy = vi.spyOn(SelfServiceServicesService.prototype, "sendTxMALog");
@@ -3220,26 +3220,32 @@ describe("processChangeClientName controller tests", () => {
 });
 
 describe("showMaxAgeEnabled controller tests", () => {
-    const mockRequest = request({
-        context: {
-            serviceId: TEST_SERVICE_ID
-        },
-        params: {
+    beforeEach(() => {
+        vi.clearAllMocks();
+    });
+
+    it("renders the expected template with the expected values", () => {
+        const mockRequest = request({
+            context: {
+                serviceId: TEST_SERVICE_ID
+            },
+            params: {
+                selfServiceClientId: TEST_SELF_SERVICE_CLIENT_ID,
+                clientId: TEST_CLIENT_ID
+            },
+            query: {
+                clientName: TEST_CLIENT_NAME
+            }
+        });
+        const mockResponse = response();
+
+        showMaxAgeEnabledForm(mockRequest, mockResponse, mockNext);
+
+        expect(mockResponse.render).toHaveBeenCalledWith("clients/enter-max-age.njk", {
+            serviceId: TEST_SERVICE_ID,
             selfServiceClientId: TEST_SELF_SERVICE_CLIENT_ID,
             clientId: TEST_CLIENT_ID
-        },
-        query: {
-            clientName: TEST_CLIENT_NAME
-        }
-    });
-    const mockResponse = response();
-
-    showMaxAgeEnabledForm(mockRequest, mockResponse, mockNext);
-
-    expect(mockResponse.render).toHaveBeenCalledWith("clients/enter-max-age.njk", {
-        serviceId: TEST_SERVICE_ID,
-        selfServiceClientId: TEST_SELF_SERVICE_CLIENT_ID,
-        clientId: TEST_CLIENT_ID
+        });
     });
 });
 

@@ -4,7 +4,7 @@ import {constructTestApiGatewayEvent, mockLambdaContext} from "../utils.js";
 import {doUpdateClientHandler} from "../../../src/handlers/step-functions/update-client.js";
 import {TEST_ACCESS_TOKEN, TEST_SERVICE_ID, TEST_USER_EMAIL, TEST_USER_ID} from "../constants.js";
 import {TEST_STATE_MACHINE_ARN} from "../../setup.js";
-import "aws-sdk-client-mock-jest";
+import "aws-sdk-client-mock-jest/vitest";
 import DynamoDbClient from "../../../src/dynamodb-client.js";
 
 const TEST_UPDATE_CLIENT_PAYLOAD = {

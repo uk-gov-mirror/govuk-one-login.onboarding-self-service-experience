@@ -24,9 +24,9 @@ describe("updateServiceClientHandler tests", () => {
 
     it("calls the dynamo client with a update command with the expected values and returns a 200 with the expected response body", async () => {
         const itemSpy = vi.spyOn(DynamoDbClient.prototype, "updateClient").mockResolvedValue({
-        serviceId: "1ded3d65-d088-4319-9431-ea5a3323799d",
-        selfServiceClientId: "570278c3-a5fd-4825-a8cf-bfdf578ee7a5"
-    });
+            serviceId: "1ded3d65-d088-4319-9431-ea5a3323799d",
+            selfServiceClientId: "570278c3-a5fd-4825-a8cf-bfdf578ee7a5"
+        });
 
         const updateServiceHandlerResponse = await updateServiceClientHandler({
             statusCode: 200,

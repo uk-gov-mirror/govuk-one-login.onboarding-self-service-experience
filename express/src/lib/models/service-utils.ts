@@ -1,4 +1,4 @@
-import {Service, ServiceFromDynamo} from "../../../@types/Service";
+import {Service, ServiceFromDynamo} from "../../../@types/Service/index.js";
 import logger from "../logger.js";
 
 export function dynamoServiceToDomainService(service: ServiceFromDynamo): Service {

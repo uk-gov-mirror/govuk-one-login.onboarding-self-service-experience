@@ -1,10 +1,10 @@
 import {AdminInitiateAuthCommandOutput, AuthenticationResultType} from "@aws-sdk/client-cognito-identity-provider";
 import {unmarshall} from "@aws-sdk/util-dynamodb";
 import {AxiosResponse} from "axios";
-import {Client, ClientFromDynamo} from "../../@types/client";
-import {OnboardingTableItem} from "../../@types/OnboardingTableItem";
-import {Service} from "../../@types/Service";
-import {DynamoUser, User} from "../../@types/user";
+import {Client, ClientFromDynamo} from "../../@types/client.js";
+import {OnboardingTableItem} from "../../@types/OnboardingTableItem/index.js";
+import {Service} from "../../@types/Service/index.js";
+import {DynamoUser, User} from "../../@types/user.js";
 import AuthenticationResultParser from "../lib/authentication-result-parser.js";
 import SelfServiceError from "../lib/errors.js";
 import {dynamoClientToDomainClient} from "../lib/models/client-utils.js";
@@ -20,6 +20,7 @@ import {TxMAEvent, TxMAExtension, TxMAUser} from "../types/txma-event.js";
 import SheetsService from "../lib/sheets/SheetsService.js";
 import {v4 as uuid_4} from "uuid";
 import logger from "../lib/logger.js";
+import {nonNull} from "../lib/utils/optional.js";
 
 export default class SelfServiceServicesService {
     private cognito: CognitoInterface;

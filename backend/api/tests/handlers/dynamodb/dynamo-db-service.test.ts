@@ -13,7 +13,7 @@ describe("getDynamoDBEntriesHandler tests", () => {
     });
 
     it("calls the getListOfClients and returns the client which includes the userEmail specified in the path params", async () => {
-        const getListOfItemsSpy = jest
+        const getListOfItemsSpy = vi
             .spyOn(DynamoDbClient.prototype, "getListOfClients")
             .mockResolvedValue({Items: [TEST_DATA_TABLE_ITEM], $metadata: {httpStatusCode: 200}});
 
@@ -46,7 +46,7 @@ describe("getDynamoDBEntriesHandler tests", () => {
     });
 
     it("returns a 400 for no userEmail parameter", async () => {
-        const getListOfItemsSpy = jest
+        const getListOfItemsSpy = vi
             .spyOn(DynamoDbClient.prototype, "getListOfClients")
             .mockResolvedValue({Items: [TEST_DATA_TABLE_ITEM], $metadata: {httpStatusCode: 200}});
 
@@ -69,7 +69,7 @@ describe("getDynamoDBEntriesHandler tests", () => {
         };
         TEST_CLIENT_ENTRY_WITH_DIFFERENT_EMAIL.contacts.L = [{S: "someEmailWhichDoesNotMatchTheProvidedOne"}];
 
-        const getListOfItemsSpy = jest
+        const getListOfItemsSpy = vi
             .spyOn(DynamoDbClient.prototype, "getListOfClients")
             .mockResolvedValue({Items: [TEST_CLIENT_ENTRY_WITH_DIFFERENT_EMAIL], $metadata: {httpStatusCode: 200}});
 
@@ -153,7 +153,7 @@ describe("deleteDynamoDBClientEntriesHandler tests", () => {
 
     it("calls the dynamo client with a delete command with the expected values and throws an error when the dynamo client throws an error", async () => {
         const error = "SomeAwsError";
-        const deleteClientEntriesSpy = jest
+        const deleteClientEntriesSpy = vi
             .spyOn(DynamoDbClient.prototype, "deleteDynamoDBClientEntries")
             .mockRejectedValue(new Error(error));
 

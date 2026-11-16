@@ -1,6 +1,8 @@
-const getCodeBlockMock = vi.fn();
-const putCodeBlockMock = vi.fn();
-const deleteCodeBlockMock = vi.fn();
+const {getCodeBlockMock, putCodeBlockMock, deleteCodeBlockMock} = vi.hoisted(() => ({
+    getCodeBlockMock: vi.fn(),
+    putCodeBlockMock: vi.fn(),
+    deleteCodeBlockMock: vi.fn()
+}));
 
 vi.mock("../../../src/handlers/dynamodb/code-block-service", () => ({
     getCodeBlock: getCodeBlockMock,

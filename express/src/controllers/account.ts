@@ -7,6 +7,7 @@ import {
 import {RequestHandler} from "express";
 import AuthenticationResultParser from "../lib/authentication-result-parser.js";
 import {convertToCountryPrefixFormat} from "../lib/mobile-number.js";
+import {nonNull} from "../lib/utils/optional.js";
 import {render} from "../middleware/request-handler.js";
 import SelfServiceServicesService from "../services/self-service-services-service.js";
 import logger from "../lib/logger.js";
