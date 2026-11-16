@@ -1,12 +1,12 @@
-const send = jest.fn();
-const queryCommand = jest.fn();
-const scanCommand = jest.fn();
-const updateItemCommand = jest.fn();
-const deleteItemCommand = jest.fn();
+const send = vi.fn();
+const queryCommand = vi.fn();
+const scanCommand = vi.fn();
+const updateItemCommand = vi.fn();
+const deleteItemCommand = vi.fn();
 
-jest.mock("@aws-sdk/client-dynamodb", () => {
+vi.mock("@aws-sdk/client-dynamodb", () => {
     return {
-        DynamoDBClient: jest.fn(() => {
+        DynamoDBClient: vi.fn(() => {
             return {
                 send: send
             };

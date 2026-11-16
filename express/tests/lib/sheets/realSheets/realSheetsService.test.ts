@@ -1,13 +1,13 @@
-const getMock = jest.fn();
-const appendMock = jest.fn();
-const JwtMock = jest.fn();
+const getMock = vi.fn();
+const appendMock = vi.fn();
+const JwtMock = vi.fn();
 
-jest.mock("googleapis", () => ({
+vi.mock("googleapis", () => ({
     google: {
         auth: {
             JWT: JwtMock
         },
-        sheets: jest.fn(() => ({
+        sheets: vi.fn(() => ({
             spreadsheets: {
                 values: {
                     get: getMock,
@@ -39,7 +39,7 @@ const TEST_APPEND_ROWS_RESPONSE = {
 
 describe("RealSheetsService tests", () => {
     beforeEach(() => {
-        jest.clearAllMocks();
+        vi.clearAllMocks();
         process.env.GOOGLE_SHEET_CREDENTIALS = JSON.stringify({
             client_email: TEST_EMAIL,
             private_key: TEST_PRIVATE_KEY

@@ -21,7 +21,7 @@ const mockSfnClient = mockClient(SFNClient);
 
 describe("newClientHandler tests", () => {
     beforeEach(() => {
-        jest.clearAllMocks();
+        vi.clearAllMocks();
     });
 
     it("returns a 200 for a successful state machine invoke", async () => {

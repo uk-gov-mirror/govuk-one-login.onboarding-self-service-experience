@@ -1,23 +1,23 @@
-const sendSms = jest.fn();
-const decrypt = jest.fn().mockImplementation(() => {
+const sendSms = vi.fn();
+const decrypt = vi.fn().mockImplementation(() => {
     return {
         plaintext: "531836"
     };
 });
 
-jest.mock("notifications-node-client", () => {
+vi.mock("notifications-node-client", () => {
     return {
-        NotifyClient: jest.fn(() => {
+        NotifyClient: vi.fn(() => {
             return {sendSms: sendSms};
         })
     };
 });
 
-jest.mock("@aws-crypto/client-node", () => {
+vi.mock("@aws-crypto/client-node", () => {
     return {
-        CommitmentPolicy: jest.fn(),
-        KmsKeyringNode: jest.fn(),
-        buildClient: jest.fn(() => {
+        CommitmentPolicy: vi.fn(),
+        KmsKeyringNode: vi.fn(),
+        buildClient: vi.fn(() => {
             return {
                 decrypt: decrypt
             };

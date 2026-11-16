@@ -5,9 +5,9 @@ const TEST_SPREADSHEET_ID = "someSpreadSheet";
 
 describe("Sheets Service tests", () => {
     beforeEach(() => {
-        jest.clearAllMocks();
+        vi.clearAllMocks();
         delete process.env.USE_STUB_SHEETS;
-        jest.spyOn(logger, "debug");
+        vi.spyOn(logger, "debug");
     });
 
     afterEach(() => {

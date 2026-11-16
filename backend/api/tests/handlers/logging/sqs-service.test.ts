@@ -19,8 +19,8 @@ const TEST_HANDLER_EVENT = constructTestApiGatewayEvent({
 
 describe("sendSQSMessageToTxMAHandler tests", () => {
     beforeEach(() => {
-        jest.spyOn(console, "log");
-        jest.clearAllMocks();
+        vi.spyOn(console, "log");
+        vi.clearAllMocks();
         mockSqsClient.reset();
     });
 

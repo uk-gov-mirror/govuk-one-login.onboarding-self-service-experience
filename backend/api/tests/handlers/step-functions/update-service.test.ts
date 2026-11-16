@@ -1,6 +1,6 @@
-const validateAuthorisationHeaderMock = jest.fn();
+const validateAuthorisationHeaderMock = vi.fn();
 
-jest.mock("../../../src/handlers/helper/validate-authorisation-header", () => ({
+vi.mock("../../../src/handlers/helper/validate-authorisation-header", () => ({
     validateAuthorisationHeader: validateAuthorisationHeaderMock
 }));
 
@@ -14,7 +14,7 @@ import "aws-sdk-client-mock-jest";
 
 import DynamoDbClient from "../../../src/dynamodb-client.js";
 
-const checkServiceUserExistsSpy = jest.spyOn(DynamoDbClient.prototype, "checkServiceUserExists");
+const checkServiceUserExistsSpy = vi.spyOn(DynamoDbClient.prototype, "checkServiceUserExists");
 
 const TEST_UPDATE_SERVICE: UpdateServiceBody = {
     serviceId: TEST_SERVICE_ID,
@@ -32,7 +32,7 @@ const mockSfnClient = mockClient(SFNClient);
 
 describe("newClientHandler tests", () => {
     beforeEach(() => {
-        jest.clearAllMocks();
+        vi.clearAllMocks();
         mockSfnClient.reset();
         validateAuthorisationHeaderMock.mockReturnValue({
             valid: true,

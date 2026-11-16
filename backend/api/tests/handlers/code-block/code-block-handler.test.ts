@@ -1,8 +1,8 @@
-const getCodeBlockMock = jest.fn();
-const putCodeBlockMock = jest.fn();
-const deleteCodeBlockMock = jest.fn();
+const getCodeBlockMock = vi.fn();
+const putCodeBlockMock = vi.fn();
+const deleteCodeBlockMock = vi.fn();
 
-jest.mock("../../../src/handlers/dynamodb/code-block-service", () => ({
+vi.mock("../../../src/handlers/dynamodb/code-block-service", () => ({
     getCodeBlock: getCodeBlockMock,
     putCodeBlock: putCodeBlockMock,
     deleteCodeBlock: deleteCodeBlockMock

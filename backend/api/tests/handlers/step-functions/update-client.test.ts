@@ -17,11 +17,11 @@ const mockSfnClient = mockClient(SFNClient);
 
 describe("newClientHandler tests", () => {
     beforeEach(() => {
-        jest.clearAllMocks();
+        vi.clearAllMocks();
     });
 
     it("returns a 400 for no body", async () => {
-        const serviceUserSpy = jest.spyOn(DynamoDbClient.prototype, "checkServiceUserExists");
+        const serviceUserSpy = vi.spyOn(DynamoDbClient.prototype, "checkServiceUserExists");
 
         const newClientResponse = await doUpdateClientHandler(
             constructTestApiGatewayEvent({
@@ -42,7 +42,7 @@ describe("newClientHandler tests", () => {
     });
 
     it("returns a 400 for no serviceId in the body", async () => {
-        const serviceUserSpy = jest.spyOn(DynamoDbClient.prototype, "checkServiceUserExists");
+        const serviceUserSpy = vi.spyOn(DynamoDbClient.prototype, "checkServiceUserExists");
 
         const newClientResponse = await doUpdateClientHandler(
             constructTestApiGatewayEvent({
@@ -67,7 +67,7 @@ describe("newClientHandler tests", () => {
     });
 
     it("returns a 403 if the service user relation does not exist", async () => {
-        const serviceUserSpy = jest.spyOn(DynamoDbClient.prototype, "checkServiceUserExists").mockResolvedValue(false);
+        const serviceUserSpy = vi.spyOn(DynamoDbClient.prototype, "checkServiceUserExists").mockResolvedValue(false);
 
         const newClientResponse = await doUpdateClientHandler(
             constructTestApiGatewayEvent({
@@ -94,7 +94,7 @@ describe("newClientHandler tests", () => {
             executionArn: TEST_STATE_MACHINE_ARN
         };
         mockSfnClient.on(StartSyncExecutionCommand).resolves(mockSfnResponse);
-        const serviceUserSpy = jest.spyOn(DynamoDbClient.prototype, "checkServiceUserExists").mockResolvedValue(true);
+        const serviceUserSpy = vi.spyOn(DynamoDbClient.prototype, "checkServiceUserExists").mockResolvedValue(true);
 
         const newClientResponse = await doUpdateClientHandler(
             constructTestApiGatewayEvent({

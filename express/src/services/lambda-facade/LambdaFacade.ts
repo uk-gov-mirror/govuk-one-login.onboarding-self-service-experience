@@ -8,7 +8,7 @@ import LambdaFacadeInterface, {ClientUpdates, ServiceNameUpdates, UserUpdates} f
 import axios, {Axios, AxiosResponse} from "axios";
 import {TxMAEvent} from "../../types/txma-event.js";
 import {createHash} from "crypto";
-import {CodeBlockResponse} from "express/src/types/code-block-response";
+import {CodeBlockResponse} from "../../types/code-block-response.js";
 import logger from "../../lib/logger.js";
 
 export default class LambdaFacade implements LambdaFacadeInterface {

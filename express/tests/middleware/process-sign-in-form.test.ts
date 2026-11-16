@@ -1,8 +1,8 @@
-const IsFixedCredMock = jest.fn();
-const IsPseudoFixedOTPCredMock = jest.fn();
+const IsFixedCredMock = vi.fn();
+const IsPseudoFixedOTPCredMock = vi.fn();
 
-jest.mock("../../src/services/self-service-services-service");
-jest.mock("../../src/lib/fixedOTP", () => ({
+vi.mock("../../src/services/self-service-services-service");
+vi.mock("../../src/lib/fixedOTP", () => ({
     isFixedOTPCredential: IsFixedCredMock,
     isPseudonymisedFixedOTPCredential: IsPseudoFixedOTPCredMock
 }));
@@ -23,16 +23,16 @@ import {
     TEST_TEMPLATE_PATH
 } from "../constants.js";
 
-const s4LoginSpy = jest.spyOn(SelfServiceServicesService.prototype, "login");
-const s4SendTxmaLogSpy = jest.spyOn(SelfServiceServicesService.prototype, "sendTxMALog");
-const s4RecoverCognitoSpy = jest.spyOn(SelfServiceServicesService.prototype, "recoverCognitoAccount");
-const s4GetDynamoDbEntriesSpy = jest.spyOn(SelfServiceServicesService.prototype, "getDynamoDBEntries");
+const s4LoginSpy = vi.spyOn(SelfServiceServicesService.prototype, "login");
+const s4SendTxmaLogSpy = vi.spyOn(SelfServiceServicesService.prototype, "sendTxMALog");
+const s4RecoverCognitoSpy = vi.spyOn(SelfServiceServicesService.prototype, "recoverCognitoAccount");
+const s4GetDynamoDbEntriesSpy = vi.spyOn(SelfServiceServicesService.prototype, "getDynamoDBEntries");
 
-const mockNext = jest.fn();
+const mockNext = vi.fn();
 
 describe("processSignInForm tests", () => {
     beforeEach(() => {
-        jest.clearAllMocks();
+        vi.clearAllMocks();
         delete process.env.USE_COGNITO_DR;
     });
 

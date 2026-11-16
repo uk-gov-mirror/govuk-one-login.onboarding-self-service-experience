@@ -11,7 +11,7 @@ describe("code block service tests", () => {
     const mockTableName = "mock-Code-Block-Table";
 
     beforeEach(() => {
-        jest.useFakeTimers().setSystemTime(TEST_TIMESTAMP);
+        vi.useFakeTimers().setSystemTime(TEST_TIMESTAMP);
         process.env.CODE_BLOCK_TABLE_NAME = mockTableName;
         mockDynamoClient.reset();
     });

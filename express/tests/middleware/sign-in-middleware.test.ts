@@ -1,7 +1,7 @@
-const IsFixedCredMock = jest.fn();
-const respondToMFAChallengeForFixedOTPCredentialMock = jest.fn();
+const IsFixedCredMock = vi.fn();
+const respondToMFAChallengeForFixedOTPCredentialMock = vi.fn();
 
-jest.mock("../../src/lib/fixedOTP", () => ({
+vi.mock("../../src/lib/fixedOTP", () => ({
     isFixedOTPCredential: IsFixedCredMock,
     respondToMFAChallengeForFixedOTPCredential: respondToMFAChallengeForFixedOTPCredentialMock
 }));
@@ -22,17 +22,17 @@ import {
 } from "../constants.js";
 import {CodeMismatchException, NotAuthorizedException} from "@aws-sdk/client-cognito-identity-provider";
 
-const resetMfaPreferenceSpy = jest.spyOn(SelfServiceServicesService.prototype, "resetMfaPreference");
-const submitUsernamePasswordSpy = jest.spyOn(SelfServiceServicesService.prototype, "submitUsernamePassword");
-const setMfaPreferenceSpy = jest.spyOn(SelfServiceServicesService.prototype, "setMfaPreference");
-const respondToMfaChallengeSpy = jest.spyOn(SelfServiceServicesService.prototype, "respondToMfaChallenge");
-const sendTxMALogSpy = jest.spyOn(SelfServiceServicesService.prototype, "sendTxMALog");
+const resetMfaPreferenceSpy = vi.spyOn(SelfServiceServicesService.prototype, "resetMfaPreference");
+const submitUsernamePasswordSpy = vi.spyOn(SelfServiceServicesService.prototype, "submitUsernamePassword");
+const setMfaPreferenceSpy = vi.spyOn(SelfServiceServicesService.prototype, "setMfaPreference");
+const respondToMfaChallengeSpy = vi.spyOn(SelfServiceServicesService.prototype, "respondToMfaChallenge");
+const sendTxMALogSpy = vi.spyOn(SelfServiceServicesService.prototype, "sendTxMALog");
 
-const mockNext = jest.fn();
+const mockNext = vi.fn();
 
 describe("processSecurityCode tests", () => {
     beforeEach(() => {
-        jest.clearAllMocks();
+        vi.clearAllMocks();
     });
 
     it("calls redirect to '/sign-in if the session object lacks an mfaResponse", async () => {

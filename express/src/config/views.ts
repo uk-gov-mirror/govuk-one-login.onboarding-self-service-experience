@@ -1,5 +1,5 @@
 import {Express} from "express";
-import {configure, render} from "nunjucks";
+import nunjucks from "nunjucks";
 import {views} from "./resources.js";
 
 export default function configureViews(app: Express) {
@@ -9,11 +9,11 @@ export default function configureViews(app: Express) {
         throw new Error("Couldn't load govuk-frontend module");
     }
 
-    configure([views, govukViews], {
+    nunjucks.configure([views, govukViews], {
         autoescape: true,
         noCache: true,
         express: app
     });
 
-    app.engine("njk", render);
+    app.engine("njk", nunjucks.render);
 }
